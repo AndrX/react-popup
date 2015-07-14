@@ -107,7 +107,7 @@ Component = React.createClass({
 		},
 
 		removeShowListener: function (callback) {
-			Manager.on(SHOW_EVENT, callback);
+			Manager.removeListener(SHOW_EVENT, callback);
 		},
 
 		addCloseListener: function (callback) {
@@ -115,7 +115,7 @@ Component = React.createClass({
 		},
 
 		removeCloseListener: function (callback) {
-			Manager.on(CLOSE_EVENT, callback);
+			Manager.removeListener(CLOSE_EVENT, callback);
 		},
 
 		register: function (data) {
