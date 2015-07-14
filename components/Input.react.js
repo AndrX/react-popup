@@ -28,7 +28,7 @@ Component = React.createClass({
 	},
 
 	componentDidMount: function () {
-		this.getDOMNode().focus();
+		React.findDOMNode(this).focus();
 	},
 
 	handleChange: function (event) {

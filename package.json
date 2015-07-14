@@ -1,6 +1,6 @@
 {
   "name": "react-popup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React popup component from Minutemailer",
   "main": "index.js",
   "scripts": {
@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/minutemailer/react-popup",
   "dependencies": {
-    "object-assign": "^1.0.0",
-    "react": "^0.12.0"
+    "object-assign": "^2.0.0",
+    "react": "^0.13.3"
   },
   "devDependencies": {
     "browserify": "^6.2.0",

@@ -240,7 +240,7 @@ Component = React.createClass({
 			return;
 		}
 
-		box = box.getDOMNode();
+		box = React.findDOMNode(box);
 
 		if (!this.state.position) {
 			box.style.opacity = 1;
