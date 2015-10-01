@@ -205,7 +205,9 @@ Component = React.createClass({
 
 		getValue: function () {
 			return Manager.value;
-		}
+		},
+
+		Manager: Manager
 
 	},
 
