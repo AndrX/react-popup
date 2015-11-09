@@ -1,29 +1,17 @@
-/**
- * @jsx React.DOM
- */
-
 'use strict';
 
-var React          = require('react'),
-    EventEmitter   = require('events').EventEmitter,
-    assign         = require('object-assign'),
-    Header         = require('./components/Header.react'),
-    Footer         = require('./components/Footer.react'),
-    Input          = require('./components/Input.react'),
-    SHOW_EVENT     = 'show',
-    CLOSE_EVENT    = 'close',
-    VALUE_EVENT    = 'value',
-    _props         = {},
-    _initialState  = {
-		'title'       : null,
-		'buttons'     : false,
-		'content'     : null,
-		'visible'     : false,
-		'className'   : null,
-		'noOverlay'   : false,
-		'position'    : false,
-		'wildClasses' : false
-	},
+import React from 'react';
+import events from 'events';
+import assign from 'react/lib/Object.assign';
+import Header from './components/Header.react';
+import Footer from './components/Footer.react';
+import Input from './components/Input.react';
+
+var EventEmitter  = events.EventEmitter,
+    SHOW_EVENT    = 'show',
+    CLOSE_EVENT   = 'close',
+    _props        = {},
+    _initialState = {},
     Manager,
     Component;
 
@@ -68,9 +56,7 @@ Manager = assign({}, EventEmitter.prototype, {
 			return false;
 		}
 
-		var popup, id;
-
-		id = this.queue.shift();
+		var id = this.queue.shift();
 
 		/** Set active */
 		this.active = id;
@@ -85,7 +71,20 @@ Component = React.createClass({
 	displayName: 'Popup',
 
 	getInitialState: function() {
-		return _initialState;
+		var state = {
+			'title'       : null,
+			'buttons'     : false,
+			'content'     : null,
+			'visible'     : false,
+			'className'   : null,
+			'noOverlay'   : false,
+			'position'    : false,
+			'wildClasses' : false
+		};
+
+		_initialState = state;
+
+		return state;
 	},
 
 	getDefaultProps: function() {
@@ -107,7 +106,7 @@ Component = React.createClass({
 		},
 
 		removeShowListener: function (callback) {
-			Manager.removeListener(SHOW_EVENT, callback);
+			Manager.on(SHOW_EVENT, callback);
 		},
 
 		addCloseListener: function (callback) {
@@ -115,7 +114,7 @@ Component = React.createClass({
 		},
 
 		removeCloseListener: function (callback) {
-			Manager.removeListener(CLOSE_EVENT, callback);
+			Manager.on(CLOSE_EVENT, callback);
 		},
 
 		register: function (data) {
@@ -208,7 +207,6 @@ Component = React.createClass({
 		},
 
 		Manager: Manager
-
 	},
 
 	componentDidMount: function() {
@@ -236,19 +234,18 @@ Component = React.createClass({
 	},
 
 	componentDidUpdate: function () {
-		var box = this.refs.box, position;
+		var box = this.refs.box;
 
 		if (!box) {
 			return;
 		}
 
-		box = React.findDOMNode(box);
-
 		if (!this.state.position) {
 			box.style.opacity = 1;
-			box.style.top  = null;
-			box.style.left = null;
-			box.style.margin = null;
+			box.style.top     = null;
+			box.style.left    = null;
+			box.style.margin  = null;
+
 			return false;
 		}
 
@@ -310,7 +307,7 @@ Component = React.createClass({
 	},
 
 	render: function() {
-		var className = this.props.className, box, closeBtn, footer, leftBtnsWrapper, leftBtns = [], rightBtnsWrapper, rightBtns = [], i, btn, overlayStyle = {}, boxClass;
+		var className = this.props.className, box, closeBtn, overlayStyle = {}, boxClass;
 
 		if (this.state.visible) {
 			className += ' ' + this.props.className + '--visible';
@@ -361,4 +358,4 @@ Component = React.createClass({
 
 });
 
-module.exports = Component;
+export default Component;
